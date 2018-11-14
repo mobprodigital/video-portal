@@ -1,0 +1,84 @@
+<div class="app-video-single">
+  <div class="container">
+    <div class="single-image">
+      <img *ngIf="currentImage" src="{{currentImage.images.Hd}}" alt="">
+    </div>
+    <div class="row">
+      
+      <div class="col-lg-4 d-none d-lg-block d-xl-block btn-group video-player-button" role="group" aria-label="Video Player">
+        <button type="button" class="btn-icon btn btn-dark player-button">
+          Like:
+          <i class="fas fa-thumbs-up"></i>
+        </button>
+        <button type="button" class="btn-icon btn btn-dark player-button">
+          Dislike:
+          <i class="fas fa-thumbs-down"></i>
+        </button>
+        <button type="button" class="btn-icon btn btn-dark player-button">
+          Share:
+          <i class="fas fa-share-alt-square"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <section class="">
+          <article *ngIf="currentImage">
+            <h1>{{currentImage.title}}</h1>
+            <ul class="meta-data-list">
+
+
+              <li class="meta-data-item">
+                <i class="fa fa-eye nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size nav-font-size">{{currentImage.viewsCount}}</span>
+              </li>
+              <li class="meta-data-item">
+                <i class="fa fa-thumbs-up nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size nav-font-size">{{currentImage.likesCount}}</span>
+              </li>
+              <li class="meta-data-item">
+                <i class="fa fa-thumbs-down nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size nav-font-size">{{currentImage.dislikesCount}}</span>
+              </li>
+            </ul>
+
+            <div>
+              <!-- Start Break Point Line Latest Post Bottom -->
+              <p class="break-point-line"> </p>
+            </div>
+            <!-- End Break Point Line Latest Post Bottom -->
+
+          </article>
+        </section>
+
+        <section class="section">
+          <header class="section-header">
+            <h6 class="section-title">Related Images</h6>
+          </header>
+          <div class="section-body">
+            <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
+          </div>
+        </section>
+
+
+      </div>
+      <!-- col-md-8 End-->
+      <!-- <div class="col-md-4">
+          <app-video-sidebar></app-video-sidebar>
+        </div> -->
+      <!-- col-md-4 End-->
+    </div>
+
+    <aside class="ads">
+      <img src="assets/images/banner/Ad/ad1.png" alt="">
+    </aside>
+
+  </div>
+  <!--main Section End -->
+</div>

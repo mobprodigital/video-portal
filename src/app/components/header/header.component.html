@@ -1,0 +1,186 @@
+<header class="app-header">
+  <aside class="nav-loader">
+    <div class="nav-progress-bar"></div>
+  </aside>
+  <section [hidden]="true" class="top-header-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <span class="text-light contact-text">
+            <!-- <b>Contact us -: </b>
+            <a href="sales@mail.com">sales@jmm.com</a> -->
+          </span>
+        </div>
+        <div class="col-lg-4 d-none d-lg-block d-xl-block">
+          <div class="btn-group header-btn-group float-right" role="group" aria-label="Basic example">
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fab fa-google-plus"></i>
+            </button>
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fas fa-user-tie"></i>
+            </button>
+            <!-- <button type="button" class="btn btn-danger btn-hover-light">Submit video</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- top-header-bar -->
+
+  <section class="logo-wrapper">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-4 d-none d-lg-block d-xl-block ">
+          <span class="logo">
+            <a routerLink="/">
+              <img src="assets/images/logo/logo.png" alt="">
+            </a>
+          </span>
+        </div>
+        <div class="col-lg-8">
+          <span class="nav-banner">
+            <img src="assets/images/banner/Ad/ad1.png" alt="">
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="main-nav theme-bg shadow-lg">
+    <div class="mobile-menu-trigger">
+      <button (click)="toggleViewMenu($event, true)" class="h-menu-btn" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="text-center">
+        <img class="mob-logo" src="assets/images/logo/logo_mobile.png" alt="">
+      </div>
+      <button type="button" class="search-btn" (click)="toggleMobileSearch(true)">
+        <i class="fas fa-search"></i>
+      </button>
+      <div class="mob-serach-box" [hidden]="!mobSaerchVisible">
+        <form (ngSubmit)="searchSubmit()">
+          <input  name="search" [(ngModel)]="searchTerm" placeholder="search" type="search" >
+        </form>
+        <span>
+          <button type="button" (click)="toggleMobileSearch(false)">
+            <i class="fas fa-times"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div [ngClass]="{'mob-menu-hidden ': !viewMenu, 'mob-menu-anim-slide-up' : viewMenu}" class="main-nav-wrapper container">
+      <div class="text-center menu-close-btn-wrap">
+        <button (click)="toggleViewMenu($event, false)" class="menu-close-btn">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
+      <div class="row justify-content-between">
+        <nav class="col-lg-auto">
+          <ul class="main-menu">
+            <li>
+              <a [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['active-link']" [routerLink]="['/']">Home</a>
+            </li>
+            <li *ngFor="let navMenu of mainMenu">
+              <a [routerLinkActive]="['active-link']" [routerLink]="[navMenu.href]">{{navMenu.text}}
+                <i (click)="toggleMobMenu($event)" *ngIf="navMenu.navItems && navMenu.navItems.length > 0" class="fas fa-angle-down"></i>
+              </a>
+              <ng-container *ngIf="navMenu.navItems && navMenu.navItems.length > 0">
+                <ul [ngClass]="{'show-mega-menu slideInDown' : viewVideoMenu}" class="animated mega-menu">
+                  <!-- mega menu cats -->
+                  <li *ngFor="let subMenuItems of navMenu.navItems">
+                    <a [routerLinkActive]="['active-link']" [routerLink]="[subMenuItems.href]">{{subMenuItems.text}}</a>
+                    <ul *ngIf="subMenuItems.megaMenuData && subMenuItems.megaMenuData.length">
+                      <li *ngFor="let mmgVideo of subMenuItems.megaMenuData">
+                        <article class="imgs-single">
+                          <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + mmgVideo.coverImage.original + ')'}">
+                            <a [routerLink]="['video/play', mmgVideo.id]">
+                              <i  class="fas fa-play play-btn"></i>
+                            </a>
+                          </div>
+                          <div class="imgs-captions">
+                            <div class="imgs-title">
+                              <a [routerLinkActive]="['active-link']" [routerLink]="['video/play', mmgVideo.id]" class="post-link">{{mmgVideo.title}}</a>
+                            </div>
+                          </div>
+                        </article>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </ng-container>
+            </li>
+            <!--  <li>
+              <a [routerLinkActive]="['active-link']" [routerLink]="['video']">Video
+                <i class="fas fa-angle-down"></i>
+              </a>
+              <ul *ngIf="videoListByCategory.length > 0" class="mega-menu mob-menu-hidden">
+                <li *ngFor="let vdoCat of videoListByCategory">
+                  <a [routerLinkActive]="['active-link']" [routerLink]="['video/category', vdoCat.id]">{{vdoCat.name}}</a>
+                  <ul>
+                    <li *ngFor="let mmgVideo of vdoCat.videos">
+                      <article class="imgs-single">
+                        <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + mmgVideo.thumbnails.large + ')'}">
+                          <i (click)="viewVideo($event, mmgVideo.id)" class="fas fa-play play-btn"></i>
+                        </div>
+                        <div class="imgs-captions">
+                          <div class="imgs-title">
+                            <a [routerLinkActive]="['active-link']" [routerLink]="['video/play', mmgVideo.id]" class="post-link">{{mmgVideo.title}}</a>
+                          </div>
+                        </div>
+                      </article>
+                    </li>
+                  </ul>
+                </li>
+
+              </ul>
+            </li>
+            <li >
+              <a [routerLink]="['image']">Images
+                <i class="fas fa-angle-down"></i>
+              </a>
+              <ul>
+                <li>
+                  <a [routerLink]="['image/category', 'wallpapers']">Desktop Wallpapers </a>
+                </li>
+                <li>
+                  <a [routerLink]="['image/category', '3d']">3d</a>
+                </li>
+                <li>
+                  <a [routerLink]="['image/category', 'nature']">Nature</a>
+                </li>
+                <li>
+                  <a [routerLink]="['image/category', 'celebrity']">Celebrity</a>
+                </li>
+              </ul>
+            </li>
+            
+            <li>
+              <a [routerLinkActive]="['active-link']" [routerLink]="['about-us']">About Us</a>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active-link']" [routerLink]="['contact-us']">Contact Us</a>
+            </li> -->
+          </ul>
+        </nav>
+        <div class="col-lg-auto">
+          <div class="search-div">
+            <form (ngSubmit)="searchSubmit()">
+              <div class="search-wrap">
+                <input name="search" [(ngModel)]="searchTerm" placeholder="Search..." type="search" class="nav-search-box">
+                <i class="fas fa-search"></i>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>

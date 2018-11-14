@@ -1,0 +1,183 @@
+.h-media-inner {
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+
+.h-media-img {
+  background-size: cover;
+  background-position: center;
+  cursor: w-resize;
+}
+
+.h-media-title {
+  text-align: center;
+  font-size: 47px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.h-media-meta-data {
+  text-align: center;
+}
+
+.banner-btn-wrap .banner-btn>span {
+  height: 24px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+}
+
+.h-media-meta-data ul {
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.h-media-meta-data ul li {
+  color: #fff;
+  padding: 0 10px;
+}
+
+.h-play-btn {
+  text-align: center;
+}
+
+.h-play-btn > a{
+  text-decoration: none;
+  color: initial;
+  display: inline-block;
+}
+
+.h-play-btn i {
+  background-color: #fff;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 25px;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  padding-top: 17px;
+  padding-left: 6px;
+  cursor: pointer;
+}
+
+.h-media-inner:hover .h-play-btn i {
+  background-color: #c00;
+}
+
+.banner-btn-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  /* justify-content: space-between; */
+  /* width: 80%; */
+}
+
+.banner-btn-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.banner-btn {
+  background-color: rgba(0, 0, 0, 0.88);
+  color: #fff;
+  padding: 30px 20px;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  border-right: 1px gray solid;
+  border-bottom: solid 6px transparent;
+  cursor: pointer;
+  flex: 0 0 300px;
+}
+
+.nav-banner img {
+  width: 100%;
+}
+
+.banner-btn:hover {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.banner-btn:first-of-type {
+  border-left: solid 1px gray;
+}
+
+.banner-btn.banner-btn-active {
+  border-bottom-color: #c00;
+}
+
+header.page-header>.banner-nav-btns {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+header.page-header>.banner-nav-btns>i {
+  width: 70px;
+  height: 70px;
+  padding-top: 7px;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  align-self: center;
+  opacity: 0.35;
+  font-size: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color, opacity 0.25s ease-in;
+}
+header.page-header>.banner-nav-btns>i:hover{
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 1;
+}
+header.page-header>.banner-nav-btns.banner-nav-btns-left {
+  left: 0;
+}
+
+header.page-header>.banner-nav-btns.banner-nav-btns-right {
+  right: 0;
+}
+
+@media screen and (max-width: 992px) {
+  .h-media-inner {
+    height: 450px;
+  }
+  
+  
+
+}
+
+@media screen and (max-width: 768px) {
+  .h-media-title {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  .banner-btn {
+    padding: 15px 15px;
+    font-size: 13px;
+  }
+  .h-media-inner {
+    height: 350px;
+  }
+}

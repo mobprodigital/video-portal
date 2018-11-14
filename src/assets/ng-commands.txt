@@ -1,0 +1,2 @@
+deploy on local server iis
+ng build --prod

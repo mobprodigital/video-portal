@@ -1,0 +1,62 @@
+
+<main class="main-content page-main-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+            <header class=" page-header-title">
+                <h1 class="page-title">{{pageTitle}}</h1>
+              </header>
+          <section class="section">
+            <header class="section-header">
+              <h2 class="section-title">Images</h2>
+  
+            </header>
+            <div class="section-body">
+              <ng-container *ngIf="allImages && allImages.length > 0">
+                <div class="row cat-wrapper">
+                  <article *ngFor="let singleImage of allImages" class="col-6">
+                    <div class="imgs-single">
+                      <div (click)="viewPost($event, singleImage.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + singleImage.images.Standard + ')'}">
+                        <i class="fas fa-link play-btn"></i>
+                      </div>
+                      <div>
+                        <div *ngIf="singleImage.categories.length > 0" class="post-categories-label">
+                          <span *ngFor="let imgCat of singleImage.categories" (click)="showVideoByCategory(imgCat.id)" class="badge badge-warning badge-categories">{{imgCat.name}}</span>
+                        </div>
+                        <div class="imgs-captions">
+                          <div class="imgs-title">
+                            <a (click)="viewPost($event, singleImage.id)" class="post-link">{{singleImage.title}}</a>
+                          </div>
+                          <div class="imgs-meta-data">
+                            <ul>
+                              <li>
+                                <i class="fas fa-eye" aria-hidden="true"></i> {{singleImage.viewsCount}}</li>
+                              <li>
+                                <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{singleImage.likesCount}}</li>
+                              <li>
+                                <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{singleImage.dislikesCount}}</li>
+                            </ul>
+                          </div>
+                          <!-- Images meta data End -->
+                        </div>
+                      </div>
+  
+                    </div>
+                  </article>
+  
+                </div>
+              </ng-container>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <app-image-sidebar></app-image-sidebar>
+        </div>
+      </div>
+      <aside class="ads">
+        <img src="assets/images/banner/Ad/ad1.png" alt="">
+      </aside>
+    </div>
+    <!-- container -->
+  </main>
+  

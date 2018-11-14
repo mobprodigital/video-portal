@@ -1,0 +1,21 @@
+section.not-found-img img {
+  width: 700px;
+}
+
+.not-found-text {
+  color: #ebebeb;
+  font-size: 55px;
+  margin: 15px;
+  display: inline-block;
+}
+.not-found-wrap{
+    margin-bottom: 40px;;
+}
+@media screen and (max-width: 992px) {
+  section.not-found-img img {
+    width: 100%;
+  }
+  .not-found-text {
+    font-size: 25px;
+  }
+}

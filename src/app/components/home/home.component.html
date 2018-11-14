@@ -1,0 +1,218 @@
+<header class="page-header">
+  <ng-container *ngIf="bannerVideos.length > 0">
+    <div class="swipe-pan-css" (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')">
+      <article *ngFor="let lVdo of bannerVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn"
+        [hidden]="!(lVdo.videoId == selectedSlide)" [ngStyle]="{'background-image' : 'url(' + lVdo.coverImage.original + ')'}">
+
+        <div class="h-media-inner">
+          <div class="h-play-btn">
+            <a [routerLink]="['video/play', lVdo.videoId]"><i class="fas fa-play"></i></a>
+          </div>
+          <div class="h-media-title">
+            {{lVdo.title}}
+          </div>
+          <div class="h-media-meta-data">
+            <ul>
+              <li>
+                <i class="fas fa-calendar"></i> oct 19, 2018
+              </li>
+              <li>
+                <i class="fas fa-eye"></i> {{lVdo.viewsCount}}
+              </li>
+              <li>
+                <i class="fas fa-thumbs-up"></i> {{lVdo.likesCount}}
+              </li>
+              <li>
+                <i class="fas fa-thumbs-down"></i> {{lVdo.dislikesCount}}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </article>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="bannerVideos.length > 0">
+    <section class="container banner-btn-container">
+      <article (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')" class="banner-btn-wrap swipe-pan-css"
+        #bannerBtnWrap>
+        <div *ngFor="let lVdoBtn of bannerVideos;let lVdoBtnIndex = index " class="banner-btn"
+          [class.banner-btn-active]="selectedSlide == lVdoBtn.videoId" (click)="showSlide(lVdoBtnIndex)">
+          <span>
+            {{lVdoBtn.title}}
+          </span>
+        </div>
+      </article>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="bannerVideos.length > 0">
+    <span (click)="bannerNextPrev($event, 'prev')" class="banner-nav-btns banner-nav-btns-left">
+      <i class="fas fa-angle-left"></i>
+    </span>
+    <span (click)="bannerNextPrev($event, 'next')" class="banner-nav-btns banner-nav-btns-right">
+      <i class="fas fa-angle-right"></i>
+    </span>
+  </ng-container>
+</header>
+
+<main class="page-main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-md-1 ad-sidebar ad-sidebar-left">
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_v1.jpg" alt="">
+        </div>
+      </aside>
+      <div class="col-md-10">
+        <!-- most liked videos -->
+        <section class="section">
+          <header class="section-header">
+            <h2 class="section-title section-title-center">Most liked videos</h2>
+          </header>
+          <div class="section-body">
+            <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
+            <div class="imgs-container">
+              <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap swipe-pan-css"
+                #imgSlider>
+                <article *ngFor="let ML_Vid of mostLikedVideos" class="imgs-single">
+                  <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.coverImage.original + ')'}">
+                    <a [routerLink]="['video/play', ML_Vid.videoId]">
+                      <i class="fas fa-play play-btn"></i>
+                    </a>
+                  </div>
+                  <div class="imgs-captions">
+                    <div class="imgs-title">
+                      <a [routerLink]="['video/play', ML_Vid.videoId]" class="post-link">{{ML_Vid.title}}</a>
+                    </div>
+                    <div class="imgs-meta-data">
+                      <ul>
+                        <li>
+                          <i class="fas fa-eye" aria-hidden="true"></i> {{ML_Vid.viewsCount}}</li>
+                        <li>
+                          <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{ML_Vid.likesCount}}</li>
+                        <li>
+                          <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{ML_Vid.dislikesCount}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <span class="imgs-control-left">
+                <i (click)="imgSlide('right')" class="fas fa-arrow-left" aria-hidden="true"></i>
+              </span>
+              <span class="imgs-control-right">
+                <i (click)="imgSlide('left')" class="fas fa-arrow-right" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </section>
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_h2.jpg" alt="">
+        </div>
+        <div class="row">
+          <section class="col-md-9">
+
+            <!-- all videos -->
+            <section class="section">
+              <header class="section-header section-header-action">
+                <h2 class="section-title">All Videos</h2>
+                <div>
+                  <ul class="category-list" *ngIf="videoCategoryList && videoCategoryList.length > 0">
+                    <li>
+                      <a [ngClass]="{'active-tab' : selectedCatTab == 'all'}" (click)="showCat($event, 'all')">All</a>
+                    </li>
+                    <li *ngFor="let cat of videoCategoryList">
+                      <a (click)="showCat($event, cat.categoryId)" [ngClass]="{'active-tab' : selectedCatTab == cat.categoryId}">{{cat.categoryName}}</a>
+                    </li>
+                  </ul>
+                  <select class="form-control category-list-select" (change)="showCat($event, $event.target.value)">
+                    <option value="all">All</option>
+                    <option value="{{cat.categoryId}}" *ngFor="let cat of videoCategoryList">
+                      {{cat.categoryName}}
+                    </option>
+                  </select>
+                </div>
+              </header>
+              <div class="section-body">
+                <ng-container *ngIf="allVideos && allVideos.length > 0">
+                  <div class="row cat-wrapper">
+                    <article *ngFor="let LT_Vid of allVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
+                      <div class="imgs-single">
+                        <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.coverImage.original + ')'}">
+                          <a [routerLink]="['video/play', LT_Vid.videoId]">
+                            <i class="fas fa-play play-btn"></i>
+                          </a>
+                        </div>
+                        <div class="imgs-captions">
+                          <div *ngIf="LT_Vid.categoryId.length > 0" class="post-categories-label">
+                            <span *ngFor="let cat of LT_Vid.categoryId" class="badge badge-warning badge-categories">{{cat.categoryName}}</span>
+                          </div>
+                          <div class="imgs-title">
+                            <a [routerLink]="['video/play', LT_Vid.videoId]" class="post-link">{{LT_Vid.title}}</a>
+                          </div>
+                          <div class="imgs-meta-data">
+                            <ul>
+                              <li>
+                                <i class="fas fa-eye" aria-hidden="true"></i> {{LT_Vid.viewsCount}}</li>
+                              <li>
+                                <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{LT_Vid.likesCount}}</li>
+                              <li>
+                                <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{LT_Vid.dislikesCount}}</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                  </div>
+                </ng-container>
+              </div>
+            </section>
+          </section>
+
+          <!-- sidebar -->
+          <section class="col-md-3">
+            <!-- <aside class="sidebar-item">
+                  <div class="sidebar-header">
+                    <h6 class="sidebar-title">Newsletter</h6>
+                  </div>
+                  <div class="sidebar-body">
+                    <p>
+                      Subscribe to our newsletter and join our 1 subscribers
+                    </p>
+                    <div class="form-group">
+                      <input type="email" class="form-control" placeholder="Your email address">
+                    </div>
+                    <div class="">
+                      <button type="button" class="btn btn-danger btn-hover-dark">Subscribe</button>
+                    </div>
+                  </div>
+                </aside> -->
+
+            <aside class="ads">
+              <img src="assets/images/banner/Ad/ad2.jpg" alt="">
+            </aside>
+            <aside class="ads">
+              <img src="assets/images/banner/Ad/ad4.png" alt="">
+            </aside>
+          </section>
+          <!-- sidebar -->
+        </div>
+
+        <aside class="ads">
+          <img src="assets/images/banner/Ad/ad_h1.jpg" alt="">
+        </aside>
+      </div>
+
+      <aside class="col-md-1 ad-sidebar ad-sidebar-right">
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_v2.jpg" alt="">
+        </div>
+      </aside>
+    </div>
+
+
+  </div>
+</main>

@@ -1,0 +1,87 @@
+<main class="main-content page-main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-md-1 ad-sidebar ad-sidebar-left">
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_v1.jpg" alt="">
+        </div>
+      </aside>
+      <main class="col-md-10">
+        <div class="row">
+          <div class="col-md-9">
+            <header class=" page-header-title">
+
+              <h1 class="page-title" [innerHTML]="pageTitle"></h1>
+            </header>
+
+            <section class="section">
+              <header class="section-header">
+                <!-- <h2 class="section-title">Videos</h2> -->
+
+              </header>
+              <div class="section-body">
+                <ng-container *ngIf="allVideos && allVideos.length > 0; else noVideoFound">
+                  <div class="row cat-wrapper">
+                    <article *ngFor="let ML_Vid of allVideos" class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                      <div class="imgs-single">
+                        <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
+
+                          <i class="fas fa-play play-btn"></i>
+                          <span class="badge badge-dark duration-text">{{ML_Vid.duration}}</span>
+                        </div>
+                        <div>
+                          <div *ngIf="ML_Vid.categories.length > 0" class="post-categories-label">
+                            <span *ngFor="let vidCat of ML_Vid.categories" (click)="showVideoByCategory(vidCat.id)" class="badge badge-warning badge-categories">{{vidCat.name}}</span>
+                          </div>
+                          <div class="imgs-captions">
+                            <div class="imgs-title">
+                              <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
+                            </div>
+
+                            <p class="video-description">{{ML_Vid.description}}</p>
+                            <div class="imgs-meta-data">
+                              <ul>
+                                <li>
+                                  <i class="fas fa-eye" aria-hidden="true"></i> {{ML_Vid.viewsCount}}</li>
+                                <li>
+                                  <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{ML_Vid.likesCount}}</li>
+                                <li>
+                                  <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{ML_Vid.dislikesCount}}</li>
+                              </ul>
+                            </div>
+                            
+                          </div>
+                        </div>
+
+                      </div>
+                    </article>
+
+                  </div>
+                </ng-container>
+                <ng-template #noVideoFound>
+                  <header class="section-header">
+                    <h2 class="section-title">{{notFoundMessage}}</h2>
+                  </header>
+                </ng-template>
+              </div>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <app-video-sidebar></app-video-sidebar>
+          </div>
+        </div>
+        <aside class="ads">
+          <img src="assets/images/banner/Ad/ad1.png" alt="">
+        </aside>
+      </main>
+      <aside class="col-md-1 ad-sidebar ad-sidebar-right">
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_v2.jpg" alt="">
+        </div>
+      </aside>
+    </div>
+
+
+  </div>
+  <!-- container -->
+</main>
