@@ -177,7 +177,7 @@ export class VideoService {
    * @param videId Video Id
    * @param time Time in seconds
    */
-  public setVideoTime(videoId: number, time: number): Promise<string> {
+  public setVideoTime(videoId: string, time: number): Promise<string> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
         apiName: 'setViewTimeByContentId.php',
@@ -211,7 +211,7 @@ export class VideoService {
           videoArr = await Promise.all(videoDataArr.map(async (vd) => {
             let vid = new VideoModel();
             vid.videoId = vd.videoId;
-            vid.categoryId = vd.categoryId && vd.categoryId.length > 0  ? vd.categoryId.map(c => new CategoryModel(c.categoryName, c.categoryId)) : [];
+            vid.categoryId = vd.categoryId && vd.categoryId.length > 0 ? vd.categoryId.map(c => new CategoryModel(c.categoryName, c.categoryId)) : [];
             vid.videoUrl = vd.videoUrl;
             vid.title = vd.title;
             vid.videoTags = vd.videoTags;
@@ -254,14 +254,13 @@ export class VideoService {
    * @param videoId Video id
    * @param catId Category id
    */
-  public getRelatedVideos(videoId: number, catId: string): Promise<VideoModel[]> {
+  public getRelatedVideos(videoId: string): Promise<VideoModel[]> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: 'getRelatedVideosByVideoId.php',
+        apiName: 'getRelatedContentsByContentId.php',
         dataToSend: {
-          contentTypeId: ContentTypeEnum.Video,
-          vid: videoId,
-          cid: catId
+          contentType: ContentTypeEnum.Video,
+          contentId: videoId,
         }
       }).then(data => {
         if (data.status === true) {

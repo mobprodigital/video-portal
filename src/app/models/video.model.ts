@@ -2,7 +2,7 @@ import { CategoryModel } from "./category.model";
 import { IthumbnailSize } from "../interfaces/thumbnail.interface";
 
 export class VideoModel {
-    public videoId: number = 0;
+    public videoId: string = '';
 
     /** Array of video category ids */
     public categoryId: CategoryModel[] = [];

@@ -59,12 +59,14 @@
               <div class="imgs-container">
                   <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
                     <article *ngFor="let ML_Vid of relatedVideos" class="imgs-single">
-                      <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.coverImage.original + ')'}">
-                        <i class="fas fa-play play-btn"></i>
+                      <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.coverImage.original + ')'}">
+                        <a [routerLink]="['/video/play', ML_Vid.videoId]">
+                          <i class="fas fa-play play-btn"></i>
+                        </a>
                       </div>
                       <div class="imgs-captions">
                         <div class="imgs-title">
-                          <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
+                          <a [routerLink]="['/video/play', ML_Vid.videoId]" class="post-link">{{ML_Vid.title}}</a>
                         </div>
                         <div class="imgs-meta-data">
                           <ul>

@@ -40,9 +40,9 @@ export class PlayVideoComponent implements OnInit, AfterViewInit, OnDestroy {
             this.setVideoData(vdo.videoUrl, vdo.coverImage.original);
             let randonCatId = this.videoModel.categoryId[Math.floor(Math.random() * this.videoModel.categoryId.length)].categoryId;
 
-            /* this._videoService.getRelatedVideos(this.videoModel.videoId, randonCatId).then(vdo => {
+            this._videoService.getRelatedVideos(this.videoModel.videoId).then(vdo => {
               this.relatedVideos = vdo;
-            }).catch(err => alert(err)); */
+            }).catch(err => alert(err));
 
 
           }).catch(err => {
